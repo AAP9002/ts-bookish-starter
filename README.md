@@ -17,3 +17,6 @@ This repo contains a starter Express server for use in the Bookish bootcamp exer
 # Post man workspace
 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/36657854-179d7928-2e4a-40da-849d-6db23483c10f?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D36657854-179d7928-2e4a-40da-849d-6db23483c10f%26entityType%3Dcollection%26workspaceId%3D72401104-0d32-44e6-9040-15c3fc68e038)
+
+# Database design page
+https://dbdiagram.io/d/Bookish-Schema-668547939939893daef0f748
