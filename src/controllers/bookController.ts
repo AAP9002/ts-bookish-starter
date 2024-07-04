@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { Book } from '../models/booksModel';
+import { Author } from '../models/authorsModel';
 
 class BookController {
     router: Router;
@@ -8,14 +9,15 @@ class BookController {
         this.router = Router();
         this.router.get('/all', this.getBooks.bind(this));
         this.router.get('/:id', this.getBook.bind(this));
-
         this.router.post('/', this.createBook.bind(this));
     }
 
     async getBooks(req: Request, res: Response) {
         const books = await Book.findAll(); 
+        const authors = await Author.findAll()
         return res.status(200).json({
-            row: books
+            row: books,
+            row2: authors
         })
     }
 

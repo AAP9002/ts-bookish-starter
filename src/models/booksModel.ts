@@ -1,17 +1,14 @@
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/db';
+import sequelizeInstance from '../config/db';
 
-
-
-export const Book = sequelize.define('User', {
+export const Book = sequelizeInstance.define('Book', {
   id: {
-    type:DataTypes.UUIDV4,
+    type:DataTypes.UUID,
     primaryKey:true
     },
   title: DataTypes.STRING,
   isbn: DataTypes.INTEGER,
-  added_at:DataTypes.BIGINT
 },{
-    timestamps:false,
+    timestamps:true,
     tableName:"books"
 });

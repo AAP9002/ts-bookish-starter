@@ -4,8 +4,6 @@ import 'dotenv/config';
 import healthcheckRoutes from './controllers/healthcheckController';
 import bookRoutes from './controllers/bookController';
 
-import { sequelize } from './config/db';
-
 const port = process.env['PORT'] || 3000;
 
 const app = express();
@@ -13,8 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });
-
-sequelize.authenticate()
 
 /**
  * Primary app routes.
