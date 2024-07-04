@@ -8,7 +8,7 @@ export const User = sequelizeInstance.define('User', {
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
     },
-  username: DataTypes.STRING,
+    username: DataTypes.STRING,
   password: DataTypes.STRING,
 },{
     timestamps:true,
