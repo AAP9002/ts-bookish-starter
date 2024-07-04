@@ -9,7 +9,7 @@ export const Book = sequelizeInstance.define('Book', {
     allowNull: false,
     },
   title: DataTypes.STRING,
-  isbn: DataTypes.INTEGER,
+  isbn: DataTypes.STRING,
 },{
     timestamps:true,
     tableName:"books"

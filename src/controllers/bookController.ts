@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { Book } from '../models/booksModel';
-import { Author } from '../models/authorsModel';
 import { Copy } from '../models/copiesModel';
+import { AuthorOfBook } from '../models/authorsOfBooksModel';
 
 class BookController {
     router: Router;
@@ -21,7 +21,6 @@ class BookController {
     }
 
     async getBook(req: Request, res: Response) {
-        // TODO: implement functionality
         try{
             const currentBook = await Book.findByPk(req.params.id);
             if(!currentBook){
@@ -44,7 +43,7 @@ class BookController {
     }
 
     async createBook(req: Request, res: Response) {
-        const { title, isbn, numberOfCopies} = req.body;
+        const { title, isbn, numberOfCopies, authors} : {title:string, isbn:string, numberOfCopies:number, authors:string[]} = req.body;
 
         try{
             const newBook = Book.build({
@@ -54,6 +53,16 @@ class BookController {
     
             await newBook.save()
             const newBookId = newBook.dataValues.id;
+
+            await Promise.all(authors.map(async (author) => {
+                    const authorBookRelationRecord = AuthorOfBook.build({
+                        authorId:author,
+                        bookId:newBookId,
+                    })
+                    await authorBookRelationRecord.save()
+                })
+            )
+
             for(let i = 0; i < numberOfCopies; i++){
                 const newBookCopy = Copy.build({
                     bookId: newBookId,
@@ -71,7 +80,6 @@ class BookController {
                 status:"Book Not Created"
             });
         }
-        // TODO: implement functionality
     }
 }
 
