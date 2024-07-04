@@ -6,7 +6,9 @@ import { User } from './usersModel';
 export const Borrow = sequelizeInstance.define('Borrow', {
     id: {
         type: DataTypes.UUID,
-        primaryKey: true
+        primaryKey:true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
     },
     copyId: {
         type: DataTypes.UUID,
