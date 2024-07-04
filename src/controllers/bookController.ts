@@ -14,19 +14,32 @@ class BookController {
 
     async getBooks(req: Request, res: Response) {
         const books = await Book.findAll(); 
-        const authors = await Author.findAll()
         return res.status(200).json({
-            row: books,
-            row2: authors
+            books: books
         })
     }
 
-    getBook(req: Request, res: Response) {
+    async getBook(req: Request, res: Response) {
         // TODO: implement functionality
-        return res.status(500).json({
-            error: 'server_error',
-            error_description: 'Endpoint not implemented yet.',
-        });
+        try{
+            const currentBook = await Book.findByPk(req.params.id);
+            if(!currentBook){
+                return res.status(400).json({
+                    error: 'invalid request',
+                error_description: 'Book record could not be found.',
+                })
+            }
+            
+            return res.status(200).json({
+                book: currentBook
+            });
+        }
+        catch(e){
+            return res.status(500).json({
+                error: 'server_error',
+                error_description: `${e}`,
+            });
+        }
     }
 
     async createBook(req: Request, res: Response) {
