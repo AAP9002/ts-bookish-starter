@@ -24,8 +24,8 @@ export const Borrow = sequelizeInstance.define('Borrow', {
             key: 'id',
         },
     },
-    due_at: DataTypes.INTEGER,
-    Borrow_at: DataTypes.INTEGER
+    dueAt: DataTypes.INTEGER,
+    borrowAt: DataTypes.INTEGER
 }, {
     timestamps: true,
     tableName: "borrows"

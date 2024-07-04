@@ -1,10 +1,12 @@
 import express from 'express';
 import 'dotenv/config';
+import bodyParser from 'body-parser';
 
 import healthcheckRoutes from './controllers/healthcheckController';
 import bookRoutes from './controllers/bookController';
-import bodyParser from 'body-parser';
 import authorRoutes from './controllers/authorController';
+import borrowRoutes from './controllers/borrowController';
+import usersRoutes from './controllers/usersController';
 
 const port = process.env['PORT'] || 3000;
 
@@ -22,3 +24,5 @@ app.listen(port, () => {
 app.use('/healthcheck', healthcheckRoutes);
 app.use('/books', bookRoutes);
 app.use('/authors', authorRoutes)
+app.use('/borrows', borrowRoutes)
+app.use('/users', usersRoutes)
