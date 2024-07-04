@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { Book } from '../models/booksModel';
 import { Author } from '../models/authorsModel';
+import { Copy } from '../models/copiesModel';
 
 class BookController {
     router: Router;
@@ -43,19 +44,25 @@ class BookController {
     }
 
     async createBook(req: Request, res: Response) {
-        const { title, isbn } = req.body;
-
-        console.log(title, isbn)
-
-        const newBook = Book.build({
-            title: title,
-            isbn: isbn,
-        })
+        const { title, isbn, numberOfCopies} = req.body;
 
         try{
+            const newBook = Book.build({
+                title: title,
+                isbn: isbn,
+            })
+    
             await newBook.save()
+            const newBookId = newBook.dataValues.id;
+            for(let i = 0; i < numberOfCopies; i++){
+                const newBookCopy = Copy.build({
+                    bookId: newBookId,
+                })
+        
+                await newBookCopy.save()
+            }
             return res.status(201).json({
-                status:"Book Created"
+                status:`Book Created and ${numberOfCopies} made`
             });
         }
         catch(e){
