@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { getDataUsingRequest } from '../config/db';
+import { Book } from '../models/booksModel';
 
 class BookController {
     router: Router;
@@ -12,14 +12,11 @@ class BookController {
         this.router.post('/', this.createBook.bind(this));
     }
 
-    getBooks(req: Request, res: Response) {
-        // TODO: implement functionality
-        getDataUsingRequest("SELECT * FROM books").then((data) => {
-            return res.status(200).json({
-                row: data
-            });
-        }
-        )
+    async getBooks(req: Request, res: Response) {
+        const books = await Book.findAll(); 
+        return res.status(200).json({
+            row: books
+        })
     }
 
     getBook(req: Request, res: Response) {
